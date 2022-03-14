@@ -2,7 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
+use App\Models\WorkEntry;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +15,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $label = 'fake-name';
+        $limit = 5;
+
+        for ($i = 1; $i <= $limit; $i++) {
+            $name = sprintf('%s-%d', $label,$i);
+            $user = User::create(['name' => $name,
+                'email' => sprintf('%s@%s', $name, 'gmail.com'),
+            ]);
+
+            WorkEntry::create([
+                'user_id' => $user->id,
+                'start_date' => new \DateTime('now'),
+            ]);
+        }
     }
 }
