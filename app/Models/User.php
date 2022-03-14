@@ -27,7 +27,7 @@ class User extends Model
      */
     public function entries(): HasMany
     {
-        return $this->hasMany(WorkEntry::class);
+        return $this->hasMany(WorkEntry::class, 'user_id', 'id');
     }
 
 }
